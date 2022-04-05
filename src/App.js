@@ -19,6 +19,22 @@ export const App = () => {
         ]);
         setTodo("");
     };
+    const clickChange = (e) => {
+        const id = Number(e.target.parentElement.firstElementChild.textContent.substr(3));
+        const states = e.target.previousElementSibling.value;
+        const changeTodo = todos.map((todo, index) => {
+            if (index === id) {
+                todo.states = states;
+            }
+            return todo;
+        });
+       setTodos(changeTodo);
+    };
+    const clickDelete = (e) => {
+        const id = Number(e.target.parentElement.firstElementChild.textContent.substr(3));
+        const removeTodo = todos.filter((todo, index) => index !== id);
+        setTodos(removeTodo);
+    };
 
     return (
         <>
@@ -40,28 +56,6 @@ export const App = () => {
             <div class="yet-area">
                 <p class="area-title">未着手</p>
                 <ul>
-                    <li>
-                        <p>id:1</p>
-                        <p>未着手1</p>
-                        <select>
-                            <option value="yet" selected>未着手</option>
-                            <option value="doing">進行中</option>
-                            <option value="done">完了</option>
-                        </select>
-                        <button class="change-btn">変更</button>
-                        <button class="delete-btn">削除</button>
-                    </li>
-                    <li>
-                        <p>id:2</p>
-                        <p>未着手2</p>
-                        <select>
-                            <option value="yet" selected>未着手</option>
-                            <option value="doing">進行中</option>
-                            <option value="done">完了</option>
-                        </select>
-                        <button class="change-btn">変更</button>
-                        <button class="delete-btn">削除</button>
-                    </li>
                     {todos.map((todo, index) => {
                         if (todo.states === "yet") {
                             return (
@@ -73,8 +67,8 @@ export const App = () => {
                                         <option value="doing">進行中</option>
                                         <option value="done">完了</option>
                                     </select>
-                                    <button class="change-btn">変更</button>
-                                    <button class="delete-btn">削除</button>
+                                    <button class="change-btn" onClick={clickChange}>変更</button>
+                                    <button class="delete-btn" onClick={clickDelete}>削除</button>
                                 </li>
                             );
                         }
@@ -84,55 +78,45 @@ export const App = () => {
             <div class="doing-area">
                 <p class="area-title">進行中</p>
                 <ul>
-                    <li>
-                        <p>id:3</p>
-                        <p>進行中1</p>
-                        <select>
-                            <option value="yet">未着手</option>
-                            <option value="doing" selected>進行中</option>
-                            <option value="done">完了</option>
-                        </select>
-                        <button class="change-btn">変更</button>
-                        <button class="delete-btn">削除</button>
-                    </li>
-                    <li>
-                        <p>id:4</p>
-                        <p>進行中2</p>
-                        <select>
-                            <option value="yet">未着手</option>
-                            <option value="doing" selected>進行中</option>
-                            <option value="done">完了</option>
-                        </select>
-                        <button class="change-btn">変更</button>
-                        <button class="delete-btn">削除</button>
-                    </li>
+                    {todos.map((todo, index) => {
+                        if (todo.states === "doing") {
+                            return (
+                                <li key={todo.id}>
+                                    <p>ID:{index}</p>
+                                    <p>{todo.text}</p>
+                                    <select>
+                                        <option value="yet">未着手</option>
+                                        <option value="doing" selected>進行中</option>
+                                        <option value="done">完了</option>
+                                    </select>
+                                    <button class="change-btn" onClick={clickChange}>変更</button>
+                                    <button class="delete-btn" onClick={clickDelete}>削除</button>
+                                </li>
+                            );
+                        }
+                    })}
                 </ul>
             </div>
             <div class="done-area">
                 <p class="area-title">完了</p>
                 <ul>
-                    <li>
-                        <p>id:5</p>
-                        <p>完了1</p>
-                        <select>
-                            <option value="yet">未着手</option>
-                            <option value="doing">進行中</option>
-                            <option value="done" selected>完了</option>
-                        </select>
-                        <button class="change-btn">変更</button>
-                        <button class="delete-btn">削除</button>
-                    </li>
-                    <li>
-                        <p>id:6</p>
-                        <p>完了2</p>
-                        <select>
-                            <option value="yet">未着手</option>
-                            <option value="doing">進行中</option>
-                            <option value="done" selected>完了</option>
-                        </select>
-                        <button class="change-btn">変更</button>
-                        <button class="delete-btn">削除</button>
-                    </li>
+                    {todos.map((todo, index) => {
+                        if (todo.states === "done") {
+                            return (
+                                <li key={todo.id}>
+                                    <p>ID:{index}</p>
+                                    <p>{todo.text}</p>
+                                    <select>
+                                        <option value="yet">未着手</option>
+                                        <option value="doing">進行中</option>
+                                        <option value="done" selected>完了</option>
+                                    </select>
+                                    <button class="change-btn" onClick={clickChange}>変更</button>
+                                    <button class="delete-btn" onClick={clickDelete}>削除</button>
+                                </li>
+                            );
+                        }
+                    })}
                 </ul>
             </div>
             
