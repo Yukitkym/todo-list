@@ -1,0 +1,92 @@
+$input-color: rgb(111, 230, 169);
+$yet-color: rgb(114, 218, 250);
+$doing-color: rgb(238, 236, 138);
+$done-color: rgb(233, 175, 121);
+
+@mixin area {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+@mixin area-li($color) {
+    display: flex;
+    background-color: darken($color, 15%);
+    margin: 10px;
+    border: 1px solid darken($color, 30%);
+    width: fit-content;
+    padding: 0px 10px;
+}
+@mixin btn {
+    height: 30px;
+    margin: auto 0px auto 10px;
+}
+h1 {
+    margin: 0px 0px 15px;
+}
+ul {
+    margin: 0px;
+}
+li {
+    p {
+        margin-right: 10px;
+    }
+    select {
+        height: 40px;
+        margin: auto 0;
+    }
+}
+.input-area {
+    @include area;
+    background-color: $input-color;
+    .create-area {
+        display: flex;
+        input {
+            height: 30px;
+            margin: auto 10px;
+        }
+        button {
+            height: 30px;
+            margin: auto 0px;
+        }
+    }
+}
+.yet-area {
+    @include area;
+    background-color: $yet-color;
+
+    ul li {
+        @include area-li($yet-color);
+    }
+}
+
+.doing-area {
+    @include area;
+    background-color: $doing-color;
+
+    ul li {
+        @include area-li($doing-color);
+    }
+}
+
+.done-area {
+    @include area;
+    background-color: $done-color;
+    
+    ul li {
+        @include area-li($done-color);
+    }
+}
+.input-title {
+    font-size: 20px;
+}
+.area-title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 0px;
+}
+.change-btn {
+    @include btn;
+}
+.delete-btn {
+    @include btn;
+}
